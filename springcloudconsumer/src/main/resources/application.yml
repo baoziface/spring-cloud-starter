@@ -1,0 +1,31 @@
+---
+spring:
+  application:
+    name: spring-cloud-consumer1
+  profiles: node1
+server:
+  port: 9001
+---
+spring:
+  application:
+    name: spring-cloud-consumer2
+  profiles: node2
+server:
+  port: 9002
+---
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+feign:
+  hystrix:
+    enabled: true
+#SpringCloud 2.0后要解决hystrix.stream 404的问题,加以下配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+      base-path: /
+
+
